@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="text-center">Notes</h1>
+
+<div id="notes" class="container px-5">
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+    <% @notes.each do |note| %>
+      <div class="col">
+        <%= render note %>
+        <p>
+          <%= link_to "Show this note", note %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to "New note", new_note_path, class: "btn btn-primary" %>
+<%= link_to "New note with turbo", new_note_path, class: "btn btn-primary", data: { turbo_frame: "remote_modal" } %>
