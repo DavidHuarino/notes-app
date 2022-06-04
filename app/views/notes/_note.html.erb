@@ -1,13 +1,13 @@
-<div id="<%= dom_id note %>" class="card text-dark bg-info p-2">
+<div id="<%= dom_id note %>" class="card text-dark bg-info p-3 shadow mb-5 rounded">
   <div class="card-header text-center">
     <%= note.name %>
   </div>
   <div class="card-body">
     <p class="card-text"><%= note.description %></p>
   </div>
-  <p>
-    <strong>Status:</strong>
-    <%= note.status %>
-  </p>
+  <div class="d-flex justify-content-around">
+    <%= link_to "Edit", edit_note_path(note), class: "btn btn-success" %>
+    <%= link_to "Delete", note, class: "btn btn-danger", method: :delete, data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
 
 </div>
