@@ -1,4 +1,4 @@
-<div id="<%= dom_id note %>" class="card text-dark bg-info p-2 shadow mb-5 rounded">
+<div id="<%= dom_id note %>" class="card text-dark bg-<%= @status_to_color[note.status] %> p-2 shadow mb-5 rounded">
   <div class="card-header text-center">
     <%= note.name %>
   </div>

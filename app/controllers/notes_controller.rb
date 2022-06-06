@@ -4,6 +4,7 @@ class NotesController < ApplicationController
   # GET /notes or /notes.json
   def index
     @notes = Note.getNotesByCurrentUser(current_user.id)
+    @status_to_color = { 'baja' => 'secondary', 'media' => 'warning', 'alta' => 'danger' }
   end
 
   # GET /notes/1 or /notes/1.json
