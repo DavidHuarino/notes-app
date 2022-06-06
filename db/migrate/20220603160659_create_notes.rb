@@ -3,7 +3,7 @@ class CreateNotes < ActiveRecord::Migration[7.0]
     create_table :notes do |t|
       t.string :name
       t.text :description
-      t.integer :status
+      t.string :status
 
       t.timestamps
     end

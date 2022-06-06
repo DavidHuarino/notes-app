@@ -20,7 +20,7 @@
   </div>
   <div class="mb-3">
     <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+    <%= form.select :status, ["baja", "media", "alta"], { selected_value: note.status || 'baja' }, {:class => "form-select"} %>
   </div>
 
   <div class="text-center">
