@@ -6,8 +6,8 @@
     <p class="card-text"><%= note.description %></p>
   </div>
   <div class="d-flex gap-3">
-    <%= link_to "Edit", edit_note_path(note), class: "btn btn-success btn-sm flex-grow-1" %>
-    <%= link_to "Delete", note, class: "btn btn-danger btn-sm flex-grow-1", method: :delete, data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>
+    <%= link_to "Edit", edit_note_path(note), class: "btn btn-success btn-sm flex-grow-1", data: { turbo_frame: "remote_modal" } %>
+    <%= link_to "Delete", note, class: "btn btn-danger btn-sm flex-grow-1", method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
   </div>
 
 </div>

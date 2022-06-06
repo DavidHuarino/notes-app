@@ -1,6 +1,8 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
+<div class="d-flex gap-1 justify-content-center">
+  <%- if controller_name != 'sessions' %>
+    <p>Already a member? </p><%= link_to "Log in", new_session_path(resource_name) %><br />
+  <% end %>
+</div>
 <div class="col-6 d-flex gap-1 justify-content-center">
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <p>Not a member?</p><%= link_to "Sign up", new_registration_path(resource_name) %><br />

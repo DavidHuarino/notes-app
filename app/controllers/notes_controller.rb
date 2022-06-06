@@ -26,8 +26,9 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        # format.html { redirect_to note_url(@note), notice: "Note was successfully created." }
-        format.json { render :show, status: :created, location: @note }
+        format.html { redirect_to notes_path, notice: "Note was successfully created." }
+        #format.html { redirect_to note_url(@note), notice: "Note was successfully created." }
+        #format.json { render :show, status: :created, location: @note }
       else
         # format.html { render :new, status: :unprocessable_entity }
         # format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -40,11 +41,12 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
+        #format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
         format.json { render :show, status: :ok, location: @note }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
+        #format.html { render :edit, status: :unprocessable_entity }
+        #format.json { render json: @note.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end
@@ -52,10 +54,13 @@ class NotesController < ApplicationController
   # DELETE /notes/1 or /notes/1.json
   def destroy
     @note.destroy
-
+    #redirect_to root_path, status: :see_other
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to root_path, status: :see_other, notice: "Note was removed." }
+    #  format.html { redirect_to notes_url, notice: "Note was removed." }
+    #  format.turbo_stream { redirect_to root_path }
+      #format.html { redirect_to notes_path, notice: "Note was successfully destroyed." }
+    #  format.json { head :no_content }
     end
   end
 
