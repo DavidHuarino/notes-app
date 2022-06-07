@@ -3,8 +3,8 @@ class NotesController < ApplicationController
 
   # GET /notes or /notes.json
   def index
-    @notes = Note.getNotesByCurrentUser(current_user.id)
-    @status_to_color = { 'baja' => 'secondary', 'media' => 'warning', 'alta' => 'danger' }
+    @notes = Note.search(params, current_user.id)
+    @status_to_color = { 'baja' => 'secondary', 'media' => 'info', 'alta' => 'warning' }
   end
 
   # GET /notes/1 or /notes/1.json
@@ -41,8 +41,8 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        #format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
-        format.json { render :show, status: :ok, location: @note }
+        format.html { redirect_to root_path, notice: "Note was successfully updated." }
+        #format.json { render :show, status: :ok, location: @note }
       else
         #format.html { render :edit, status: :unprocessable_entity }
         #format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -56,11 +56,12 @@ class NotesController < ApplicationController
     @note.destroy
     #redirect_to root_path, status: :see_other
     respond_to do |format|
-      format.html { redirect_to root_path, status: :see_other, notice: "Note was removed." }
+      format.html { redirect_to notes_path, status: :see_other, notice: "Note was removed." }
+      #format.turbo_stream { redirect_to notes_path }
     #  format.html { redirect_to notes_url, notice: "Note was removed." }
     #  format.turbo_stream { redirect_to root_path }
       #format.html { redirect_to notes_path, notice: "Note was successfully destroyed." }
-    #  format.json { head :no_content }
+      format.json { head :no_content }
     end
   end
 

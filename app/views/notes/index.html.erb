@@ -1,14 +1,11 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand">Notes App</a>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-      <%#= if current_user %>
-        <%#= current_user.email %>
-      <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
-      <%# end %>
-    </form>
+    <%= form_tag notes_path, method: :get, data: { turbo_frame: "search-results", turbo_action: "advance", controller: "search", action: "input->search#submit" },  class: "d-flex gap-1" do |f| %>
+      <%= text_field_tag "query", nil, placeholder: "Search by name ...", class: "form-control" %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+    <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-secondary" %>
   </div>
 </nav>
 <div class="d-flex justify-content-between py-3 px-5">
@@ -17,12 +14,14 @@
   <%= link_to "New note", new_note_path, class: "btn btn-primary", data: { turbo_frame: "remote_modal" } %>
 </div>
 <div id="notes" class="container px-5">
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <% @notes.each do |note| %>
-      <div class="col-sm-4 col-md-3">
-        <%= render note %>
-      </div>
-    <% end %>
-  </div>
+  <%= turbo_frame_tag "search-results" do %>
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <% @notes.each do |note| %>
+        <div class="col-sm-4 col-md-3">
+          <%= render note %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
