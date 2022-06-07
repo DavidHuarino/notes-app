@@ -3,7 +3,7 @@ A web application for writing and organizing notes.
 
 ## Screenshots
 ### Welcome View:
-
+![image](https://user-images.githubusercontent.com/22582753/172478740-2d7954aa-6557-4f42-b724-fcb7f60a32d2.png)
 ### Home View:
 
 ## Languages
